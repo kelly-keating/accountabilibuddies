@@ -1,6 +1,7 @@
 import { GithubAuthProvider, signInWithPopup } from "firebase/auth"
 import auth from "../auth"
 import { useState } from "react"
+import { addNewUser, checkUserExists } from "../db"
 
 export const useGitHubLogin = () => {
   const [error, setError] = useState<null | string>(null)
@@ -17,13 +18,15 @@ export const useGitHubLogin = () => {
         throw new Error("Could not complete signup")
       }
 
-      const user = res.user
-      console.log(user)
+      const userInDb = await checkUserExists(res.user.uid)
+      if (!userInDb) {
+        addNewUser(res.user)
+      }
+ 
+      console.log(res.user)
       setIsPending(false)
     } catch (error) {
-      console.log(error)
-      const err = error as Error
-      setError(err.message)
+      setError((error as Error).message)
       setIsPending(false)
     }
   }

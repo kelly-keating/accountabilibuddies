@@ -1,16 +1,19 @@
-import { User } from 'firebase/auth'
+import * as FirebaseAuth from 'firebase/auth'
 
-export type FirebaseUser = User
-
-export interface Fruit {
-  id: number
-  name: string
-  rating: number
+export type FirebaseUser = FirebaseAuth.User
+export interface User {
+  displayName: string,
+  photoUrl: string,
+  lastEntry: string | null,
+  ratings: Record<string, RatingKeys>
 }
 
-export interface Vinyl {
-  id: number
-  artist: string
-  title: string
-  image: string
+export type AllUsers = Record<string, User>
+export type ActiveUsers = Record<string, boolean>
+
+export interface RatingKeys {
+  id: string,
+  text: string,
+  current: boolean,
 }
+export type Ratings = Record<string, Record<string, Record<string, number>>> 

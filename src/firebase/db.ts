@@ -1,27 +1,43 @@
-import { getDatabase, ref, onValue, set, remove } from "firebase/database"
+import { getDatabase, ref, set, remove, get } from "firebase/database"
+import { FirebaseUser } from "../models"
 
 // import { getUserId } from './auth'
 
 const db = getDatabase()
 export default db
 
-type ListenerFn = (data: any) => void
+// USER
 
-export function startListening (
-  usersFn: ListenerFn,
-  activeUsersFn: ListenerFn,
-  ratingsFn: ListenerFn,
-) {
-  const activeUsersRef = ref(db, `active-users`)
-  const usersRef = ref(db, `users`)
-  const ratingsRef = ref(db, `ratings`)
-
-  onValue(activeUsersRef, (snapshot) => activeUsersFn(snapshot.val()))
-  onValue(usersRef, (snapshot) => usersFn(snapshot.val()))
-  onValue(ratingsRef, (snapshot) => ratingsFn(snapshot.val()))
+export async function checkUserExists (uid: string) {
+  const userInfoRef = ref(db, `users/` + uid)
+  try {
+    const snapshot = await get(userInfoRef)
+    return snapshot.exists()
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-// // USER
+export function addNewUser (userDetails: FirebaseUser) {
+  const newUserData = {
+    displayName: userDetails.displayName,
+    photoUrl: userDetails.photoURL,
+    lastEntry: null,
+    ratings: {}
+  } // TODO: fb doesn't display these two nothing keys
+
+  const userRef = ref(db, `users/` + userDetails.uid)
+  set(userRef, newUserData)
+
+  setUserActive(userDetails.uid)
+}
+
+// ACTIVE USERS
+
+export function setUserActive (uid: string) {
+  const activeRef = ref(db, `activeUsers/` + uid)
+  set(activeRef, true)
+}
 
 // export function setUpdated () {
 //   const userRef = ref(db, `${getUserId()}/user/lastUpdated`)

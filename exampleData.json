@@ -1,29 +1,31 @@
 {
-  "active-users": [
-      "id-1",
-      "id-2"
-  ],
+  "activeUsers": {
+      "id-1": true,
+      "id-2": true
+  },
   "users": {
     "id-1": {
-      "display-name": "Mr Sir",
-      "photo-url": "https://www.freeimageslive.co.uk/files/images005/black_and_white_cat.preview.jpg",
-      "last-active": "date goes here",
+      "displayName": "Mr Sir",
+      "photoUrl": "https://www.freeimageslive.co.uk/files/images005/black_and_white_cat.preview.jpg",
+      "lastEntry": "date goes here",
       "ratings": {
         "1": {
+          "id": "1",
           "text": "learning",
           "current": true
         },
         "2": {
+          "id": "2",
           "text": "jobbing",
           "current": true
         }
       }
     },
     "id-2": {
-      "last-active": "date goes here"
+      "lastEntry": "date goes here"
     },
     "id-3": {
-      "last-active": "date goes here"
+      "lastEntry": "date goes here"
     }
   },
   "ratings": {

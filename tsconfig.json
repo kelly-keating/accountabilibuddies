@@ -1,0 +1,27 @@
+{
+  "include": ["src/**/*"],
+  "ts-node": { "transpileOnly": true },
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2020",
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    
+    /* Modules */
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+
+    /* Type Checking */
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    "isolatedModules": true, 
+    "allowImportingTsExtensions": true
+  }
+}

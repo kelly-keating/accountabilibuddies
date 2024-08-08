@@ -1,0 +1,31 @@
+.app-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 20px;
+}
+
+.editModal {
+  position: 'fixed';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  background-color: 'white';
+  padding: '1em';
+  z-index: 1000;
+}
+
+#honk-hard-font {
+  font-family: "Honk", system-ui;
+  font-variation-settings:
+  "MORF" 16,
+  "SHLN" 45;
+}
+
+#honk-bubble-font {
+  font-family: "Honk", system-ui;
+  font-variation-settings:
+    "MORF" 27,
+    "SHLN" 32.6;
+}

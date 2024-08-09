@@ -1,9 +1,10 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
+import { useData } from '../firebase/contexts/data'
 
+import GraphDisplayList from './GraphDisplayList'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
 import Profile from './Profile'
-import { useData } from '../firebase/contexts/data'
 
 function Dash() {
   const { users } = useData()
@@ -23,6 +24,10 @@ function Dash() {
           <Profile />
         </Box>
       </Flex>
+
+      <Box mt="50px">
+        <GraphDisplayList />
+      </Box>
     </>
   )
 }

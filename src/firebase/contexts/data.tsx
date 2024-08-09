@@ -46,7 +46,7 @@ export const DataProvider = ({ children }: Props) => {
   })
 
   useEffect(() => {
-    const activeUsersRef = ref(db, `active-users`)
+    const activeUsersRef = ref(db, `activeUsers`)
     const ratingsRef = ref(db, `ratings`)
     const usersRef = ref(db, `users`)
 

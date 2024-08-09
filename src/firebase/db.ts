@@ -1,5 +1,5 @@
-import { getDatabase, ref, set, remove, get } from "firebase/database"
-import { FirebaseUser } from "../models"
+import { getDatabase, ref, set, remove, get } from 'firebase/database'
+import { FirebaseUser } from '../models'
 
 // import { getUserId } from './auth'
 
@@ -8,7 +8,7 @@ export default db
 
 // USER
 
-export async function checkUserExists (uid: string) {
+export async function checkUserExists(uid: string) {
   const userInfoRef = ref(db, `users/` + uid)
   try {
     const snapshot = await get(userInfoRef)
@@ -18,12 +18,12 @@ export async function checkUserExists (uid: string) {
   }
 }
 
-export function addNewUser (userDetails: FirebaseUser) {
+export function addNewUser(userDetails: FirebaseUser) {
   const newUserData = {
     displayName: userDetails.displayName,
     photoUrl: userDetails.photoURL,
     lastEntry: null,
-    ratings: {}
+    ratings: {},
   } // TODO: fb doesn't display these two nothing keys
 
   const userRef = ref(db, `users/` + userDetails.uid)
@@ -34,7 +34,7 @@ export function addNewUser (userDetails: FirebaseUser) {
 
 // ACTIVE USERS
 
-export function setUserActive (uid: string) {
+export function setUserActive(uid: string) {
   const activeRef = ref(db, `activeUsers/` + uid)
   set(activeRef, true)
 }

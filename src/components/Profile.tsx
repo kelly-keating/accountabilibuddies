@@ -1,9 +1,9 @@
-import { useAuth } from "../firebase/contexts/auth"
+import { useAuth } from '../firebase/contexts/auth'
 
 function CurrentUser() {
   const user = useAuth()
 
-  return <div>{user?.displayName || "unauthenticated"}</div>
+  return <div>{user?.displayName || 'unauthenticated'}</div>
 }
 
 export default CurrentUser

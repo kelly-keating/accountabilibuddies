@@ -1,7 +1,7 @@
 {
   "activeUsers": {
-      "id-1": true,
-      "id-2": true
+    "id-1": true,
+    "id-2": true
   },
   "users": {
     "id-1": {

@@ -11,7 +11,9 @@ import auth from '../auth'
 
 type PotentialUser = FirebaseUser | null
 type ContextState = { user: PotentialUser }
-interface Props { children: ReactNode }
+interface Props {
+  children: ReactNode
+}
 
 const AuthContext = createContext<ContextState>({ user: null })
 
@@ -29,6 +31,8 @@ export function AuthProvider({ children }: Props) {
 
 export function useAuth() {
   const context = useContext(AuthContext)
-  if (context === undefined) { throw new Error('lol, you forgot your AuthProvider') }
+  if (context === undefined) {
+    throw new Error('lol, you forgot your AuthProvider')
+  }
   return context.user
 }

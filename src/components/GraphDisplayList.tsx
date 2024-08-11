@@ -2,6 +2,8 @@ import { useMemo } from "react"
 import { useData } from "../firebase/contexts/data"
 import { Avatar, Box } from "@chakra-ui/react"
 
+import UserGraph from "./UserGraph"
+
 function GraphDisplayList() {
   const { activeUsers, users } = useData()
 
@@ -14,6 +16,7 @@ function GraphDisplayList() {
         <Box key={id}>
           <Avatar name={users[id]?.displayName} src={users[id]?.photoUrl} />
           <h2>{users[id]?.displayName}</h2>
+          <UserGraph userId={id} />
         </Box>
       ))}
     </>

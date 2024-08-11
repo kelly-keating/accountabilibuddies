@@ -15,5 +15,6 @@ export interface RatingKeys {
   id: string
   text: string
   current: boolean
+  col?: string
 }
 export type Ratings = Record<string, Record<string, Record<string, number>>>

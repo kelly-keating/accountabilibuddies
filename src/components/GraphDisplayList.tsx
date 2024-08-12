@@ -1,8 +1,8 @@
-import { useMemo } from "react"
-import { useData } from "../firebase/contexts/data"
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react"
+import { useMemo } from 'react'
+import { useData } from '../firebase/contexts/data'
+import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
 
-import UserGraph from "./UserGraph"
+import UserGraph from './UserGraph'
 
 function GraphDisplayList() {
   const { activeUsers, users } = useData()

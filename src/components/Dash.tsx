@@ -1,14 +1,34 @@
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { Box, Divider, Flex, Heading } from '@chakra-ui/react'
 import { useData } from '../firebase/contexts/data'
+import { useAuth } from '../firebase/contexts/auth'
+import { getUserId } from '../firebase/auth'
 
+import EditRatings from './EditRatings'
 import GraphDisplayList from './GraphDisplayList'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
-import Profile from './Profile'
+import NewUserPopup from './NewUserPopup'
+import ShowRatingButton from './ShowRatingButton'
+import ThisWeek from './ThisWeek'
 
 function Dash() {
+  const user = useAuth()
   const { users } = useData()
-  const userNum = users ? Object.keys(users).length : 0
+
+  const [showNewUserPrompt, setNewUserPrompt] = useState(false)
+  const closePopup = () => { setNewUserPrompt(false) }
+
+  const [showEditRatings, setShowEditRatings] = useState(false)
+  const openEditRatings = () => { setShowEditRatings(true) }
+  const closeEditRatings = () => { setShowEditRatings(false) }
+
+  useEffect(() => {
+    const uid = getUserId()
+    if (users && uid && !users[uid].ratings) {
+      setNewUserPrompt(true)
+    }
+  }, [user, users])
 
   return (
     <>
@@ -16,18 +36,32 @@ function Dash() {
         align="center" justify="space-between"
         position="fixed" top="0" left="0" w="100vw" px="20px" py="10px"
       >
-        <Heading id="honk-hard-font">Accountabilibuddies </Heading>
+        <Heading id="honk-hard-font">Accountabilibuddies</Heading>
 
-        <Box>
+        <Flex align="center">
+          <ShowRatingButton
+            showEdit={showEditRatings}
+            openEdit={openEditRatings}
+            closeEdit={closeEditRatings}
+          />
           <LoginButton />
           <LogoutButton />
-          <Profile />
-        </Box>
+        </Flex>
       </Flex>
 
       <Box mt="50px">
+        <EditRatings />
+        <ThisWeek />
+        <Divider marginY="20px" />
         <GraphDisplayList />
       </Box>
+
+      {showNewUserPrompt && (
+        <NewUserPopup
+          closeModal={closePopup}
+          openAddRatings={openEditRatings}
+        />
+      )}
     </>
   )
 }

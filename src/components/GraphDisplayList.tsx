@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { useData } from "../firebase/contexts/data"
-import { Avatar, Box } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react"
 
 import UserGraph from "./UserGraph"
 
@@ -11,12 +11,15 @@ function GraphDisplayList() {
 
   return (
     <>
-      <h2>GraphDisplayList</h2>
       {users && activeIds.map(id => (
         <Box key={id}>
-          <Avatar name={users[id]?.displayName} src={users[id]?.photoUrl} />
-          <h2>{users[id]?.displayName}</h2>
-          <UserGraph userId={id} />
+          <Flex align="center" >
+            <Avatar name={users[id]?.displayName} src={users[id]?.photoUrl} />
+            <Text ml="10px">{users[id]?.displayName}</Text>
+          </Flex>
+          <Box marginY="10px">
+            <UserGraph userId={id} />
+          </Box>
         </Box>
       ))}
     </>

@@ -22,8 +22,8 @@ function UserGraph({ userId }: Props) {
   const userRatings = ratings && ratings[userId] || {}
 
   const recentDates = getRecentWednesdays()
-  const data = recentDates.map((d) => {
-    const date = formatDate.firebaseToDisplay(d)
+  const data = recentDates.map((d,  idx) => {
+    const date = idx === 0 ? "This Wednesday" : formatDate.firebaseToDisplay(d)
 
     return {
       date,
@@ -41,10 +41,10 @@ function UserGraph({ userId }: Props) {
       <LineChart
        width={730} height={250}
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="2" />
-        <XAxis dataKey="date" padding={{ left: 30, right: 30 }} />
+        <XAxis dataKey="date" padding={{ left: 30 }} />
         <YAxis domain={[0,5]} tickCount={6} />
         <Tooltip />
         <Legend />

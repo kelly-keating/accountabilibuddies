@@ -16,7 +16,7 @@ function Dash() {
         align="center" justify="space-between"
         position="fixed" top="0" left="0" w="100vw" px="20px" py="10px"
       >
-        <Heading id="honk-hard-font">Accountabilibuddies ({userNum})</Heading>
+        <Heading id="honk-hard-font">Accountabilibuddies </Heading>
 
         <Box>
           <LoginButton />

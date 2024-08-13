@@ -1,7 +1,7 @@
 export function getRecentWednesdays() {
   const now = new Date()
   const currentDay = now.getDay()
-  const daysSinceLastWednesday = (currentDay - 3 + 7) % 7
+  const daysSinceLastWednesday = (currentDay - 3 + 7) % 7 || 7
 
   const lastWednesday = new Date()
   lastWednesday.setDate(now.getDate() - daysSinceLastWednesday)

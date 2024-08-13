@@ -1,5 +1,6 @@
 import { getDatabase, ref, set, remove, get } from 'firebase/database'
 import { FirebaseUser } from '../models'
+import { getUserId } from './auth'
 
 // import { getUserId } from './auth'
 
@@ -19,6 +20,7 @@ export async function checkUserExists(uid: string) {
 }
 
 export function addNewUser(userDetails: FirebaseUser) {
+  const uid = getUserId() || userDetails.uid
   const newUserData = {
     displayName: userDetails.displayName,
     photoUrl: userDetails.photoURL,
@@ -26,10 +28,26 @@ export function addNewUser(userDetails: FirebaseUser) {
     ratings: {},
   } // TODO: fb doesn't display these two nothing keys
 
-  const userRef = ref(db, `users/` + userDetails.uid)
+  const userRef = ref(db, `users/` + uid)
   set(userRef, newUserData)
 
-  setUserActive(userDetails.uid)
+  setUserActive(uid)
+}
+
+// RATINGS
+
+export function addNewUserRating(text: string) {
+  const uid = getUserId()
+  const uniqueId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+
+  const ratingRef = ref(db, `users/${uid}/ratings/` + uniqueId)
+  const ratingObj = {
+    id: uniqueId,
+    current: true,
+    text,
+  }
+
+  set(ratingRef, ratingObj)
 }
 
 // ACTIVE USERS

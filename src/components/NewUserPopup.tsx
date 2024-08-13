@@ -19,6 +19,7 @@ function RatingsPopup({ closeModal, openAddRatings }: Props) {
   const theySaidYes = () => {
     openAddRatings()
     closeModal()
+    window.scrollTo(0, 0)
   }
 
   return (

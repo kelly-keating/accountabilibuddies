@@ -8,7 +8,7 @@ interface Props {
 
 function ShowRatingButton({ showEdit, openEdit, closeEdit }: Props) {
   return (
-    <Button as="button" onClick={showEdit ? closeEdit : openEdit}>
+    <Button as="button" onClick={showEdit ? closeEdit : openEdit} mr="10px">
       {showEdit ? 'Cancel Edit' : 'Edit your entries'}
     </Button>
   )

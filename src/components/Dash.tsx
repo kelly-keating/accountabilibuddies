@@ -4,7 +4,7 @@ import { useData } from '../firebase/contexts/data'
 import { useAuth } from '../firebase/contexts/auth'
 import { getUserId } from '../firebase/auth'
 
-import EditRatings from './EditRatings'
+import EditRatings from './EditRatings/EditRatings'
 import GraphDisplayList from './GraphDisplayList'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
@@ -49,9 +49,13 @@ function Dash() {
         </Flex>
       </Flex>
 
-      <Box mt="50px">
-        <EditRatings />
-        <ThisWeek />
+      {/* TODO: make this box grow/shrink & centered */}
+      <Box mt="80px">
+        {showEditRatings ? (
+          <EditRatings finish={closeEditRatings} />
+        ) : (
+          <ThisWeek />
+        )}
         <Divider marginY="20px" />
         <GraphDisplayList />
       </Box>

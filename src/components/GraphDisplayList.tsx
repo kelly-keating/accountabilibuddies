@@ -11,9 +11,9 @@ function GraphDisplayList() {
 
   return (
     <>
-      {users && activeIds.map(id => (
+      {users && activeIds.map((id) => (
         <Box key={id}>
-          <Flex align="center" >
+          <Flex align="center">
             <Avatar name={users[id]?.displayName} src={users[id]?.photoUrl} />
             <Text ml="10px">{users[id]?.displayName}</Text>
           </Flex>

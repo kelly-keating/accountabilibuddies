@@ -28,18 +28,18 @@ export function getNextWednesday() {
 }
 
 export const formatDate = {
-  dateToString: (givenDate) => {
+  dateToString: (givenDate: Date) => {
     const year = givenDate.getFullYear()
     const month = String(givenDate.getMonth() + 1).padStart(2, '0')
     const day = String(givenDate.getDate()).padStart(2, '0')
 
     return `${year}-${month}-${day}`
   },
-  firebaseToDisplay: (str) => {
+  firebaseToDisplay: (str: string) => {
     const [year, month, day] = str.split('-')
     return [day, month, year].join('/')
   },
-  displayToFirebase: (str) => {
+  displayToFirebase: (str: string) => {
     const [day, month, year] = str.split('/')
     return [year, month, day].join('-')
   },

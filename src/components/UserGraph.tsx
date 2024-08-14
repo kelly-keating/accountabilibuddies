@@ -3,13 +3,13 @@ import {
   Legend,
   Line,
   LineChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
-import { formatDate, getRecentWednesdays } from '../dateUtil'
+import { formatDate, getRecentWednesdays } from '../dateUtils'
 import { useData } from '../firebase/contexts/data'
+import { getGenericColour } from '../colourUtils'
 
 interface Props {
   userId: string
@@ -31,24 +31,11 @@ function UserGraph({ userId }: Props) {
     }
   })
 
-  const chartCols = [
-    '#8884d8',
-    '#82ca9d',
-    '#ffc658',
-    '#d88484',
-    '#ca82d1',
-    '#84d8d6',
-  ]
   return (
-    // <ResponsiveContainer
-    // // width="90px"
-    // // height="250px"
-    // >
     <LineChart
       width={730}
       height={250}
       data={data}
-      // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
     >
       <CartesianGrid strokeDasharray="2" />
       <XAxis dataKey="date" padding={{ left: 30 }} />
@@ -61,13 +48,12 @@ function UserGraph({ userId }: Props) {
           name={userKeys[id].text}
           type="monotone"
           dataKey={id}
-          stroke={userKeys[id].col || chartCols[idx % chartCols.length]}
+          stroke={userKeys[id].col || getGenericColour(idx)}
           strokeWidth={1.5}
           connectNulls={true}
         />
       ))}
     </LineChart>
-    // </ResponsiveContainer>
   )
 }
 

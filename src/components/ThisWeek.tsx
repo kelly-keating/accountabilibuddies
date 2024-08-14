@@ -41,7 +41,7 @@ function ThisWeek() {
           <Box key={rating.id}>
             <Text>{rating.text}: {currentRatings[rating.id] || "-"}</Text>
             <Box m="20px">
-              <Slider onChange={updateRating} onClick={() => updateRating(displayVal)} defaultValue={displayVal} min={1} max={5} step={1}>
+              <Slider onChange={updateRating} onClick={() => updateRating(displayVal)} value={displayVal} min={1} max={5} step={1}>
                 <SliderTrack bg={lightCol}>
                   <SliderFilledTrack bg={lightCol} />
                 </SliderTrack>

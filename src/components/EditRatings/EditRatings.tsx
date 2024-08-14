@@ -1,18 +1,11 @@
 import {
   Button,
-  FormControl,
-  FormLabel,
   Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
   Flex,
-  UnorderedList,
   Grid,
   GridItem,
-  ListItem,
-  List,
-  ListIcon,
+  Box,
+  Text,
 } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { getUserId } from '../../firebase/auth'
@@ -20,6 +13,8 @@ import { useData } from '../../firebase/contexts/data'
 import { RatingKeys } from '../../models'
 import { FormEvent, useEffect, useState } from 'react'
 import { addNewUserRating } from '../../firebase/db'
+import IconKey from './IconKey'
+import AddNewForm from './AddNewForm'
 
 interface Props {
   finish: () => void
@@ -29,13 +24,13 @@ function EditRatings({ finish }: Props) {
   const { users } = useData()
   const uid = getUserId()
 
-  const [simpleAdd, setSimpleAdd] = useState(true)
-  const toggleAdvanced = () => setSimpleAdd(!simpleAdd)
+  const [advancedMode, setAdvancedMode] = useState(false)
+  const toggleAdvanced = () => setAdvancedMode(!advancedMode)
 
   const [selectedEdit, setSelectedEdit] = useState<string | null>(null)
   useEffect(() => {
     setSelectedEdit(null)
-  }, [simpleAdd])
+  }, [advancedMode])
 
   const loaded = users && uid && users[uid]
   if (!loaded) return null
@@ -67,65 +62,39 @@ function EditRatings({ finish }: Props) {
         </Heading>
       </GridItem>
       <GridItem area="updateForm">
-        {/* TODO: breakout to components */}
         <Flex justify="center" w="100%" h="100%">
-          {simpleAdd ? (
-            <form onSubmit={addRating} className="newEntry_form">
-              <FormControl isRequired>
-                <Flex align="center">
-                  <FormLabel w="125px" m="0">
-                    New entry:
-                  </FormLabel>
-                  <InputGroup>
-                    <Input type="text" />
-                    <InputRightElement width="4.5rem">
-                      <Button type="submit" h="1.75rem" size="sm">
-                        Add
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </Flex>
-              </FormControl>
-            </form>
+          {!advancedMode ? (
+            <AddNewForm addFn={addRating} />
           ) : (
-            <List>
-              <ListItem>
-                <ListIcon as={EditIcon} /> Change text
-              </ListItem>
-              <ListItem>
-                <ListIcon as={ViewOffIcon} /> Stop asking each week
-              </ListItem>
-              <ListItem>
-                <ListIcon as={DeleteIcon} /> Totally remove data
-              </ListItem>
-            </List>
+            <IconKey />
           )}
         </Flex>
       </GridItem>
       <GridItem area="mainList">
-        <UnorderedList pl="15px">
+        <Box w="1fr">
           {!activeRatings.length && (
-            <ListItem>Nothing! Please add something below :)</ListItem>
+            <Box>Nothing! Please add something :)</Box>
           )}
           {activeRatings.map((r) => (
-            <ListItem key={r.id} h="30px">
-              {r.text}
-              {!simpleAdd && (
-                <>
-                  <Button colorScheme="teal" size="xs" aria-label="Edit text">
+            <Box key={r.id} minH="30px" display="flex" justifyContent="space-between">
+              <Text maxW="200px">{r.text}</Text>
+              {advancedMode && (
+                <Box>
+
+                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Edit text">
                     <EditIcon />
                   </Button>
-                  <Button colorScheme="teal" size="xs" aria-label="Pause">
+                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Pause">
                     <ViewOffIcon />
                   </Button>
-                  <Button colorScheme="teal" size="xs" aria-label="Delete">
+                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Delete">
                     <DeleteIcon />
                   </Button>
-                </>
+                </Box>
               )}
-            </ListItem>
+            </Box>
           ))}
-        </UnorderedList>
+        </Box>
       </GridItem>
       <GridItem area="blank" />
       <GridItem area="footer">
@@ -133,7 +102,7 @@ function EditRatings({ finish }: Props) {
           Finish
         </Button>
         <Button onClick={toggleAdvanced} mr="10px">
-          {simpleAdd ? 'Advanced Edit' : 'Hide Advanced'}
+          {advancedMode ? 'Hide Advanced' : 'Advanced Edit'}
         </Button>
       </GridItem>
     </Grid>

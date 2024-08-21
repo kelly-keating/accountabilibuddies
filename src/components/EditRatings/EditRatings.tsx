@@ -5,16 +5,17 @@ import {
   Grid,
   GridItem,
   Box,
-  Text,
 } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { getUserId } from '../../firebase/auth'
 import { useData } from '../../firebase/contexts/data'
-import { RatingKeys } from '../../models'
+import { RatingKeys, UpdateMode } from '../../models'
 import { FormEvent, useEffect, useState } from 'react'
 import { addNewUserRating } from '../../firebase/db'
 import IconKey from './IconKey'
 import AddNewForm from './AddNewForm'
+import CurrentTrackingItem from './CurrentTrackingItem'
+import ConfirmDelete from './ConfirmDelete'
+import EditExisting from './EditExisting'
 
 interface Props {
   finish: () => void
@@ -27,9 +28,15 @@ function EditRatings({ finish }: Props) {
   const [advancedMode, setAdvancedMode] = useState(false)
   const toggleAdvanced = () => setAdvancedMode(!advancedMode)
 
-  const [selectedEdit, setSelectedEdit] = useState<string | null>(null)
+  const [editMode, setEditMode] = useState<UpdateMode>("displayOnly")
+  const [focusId, setFocusId] = useState<string | null>(null)
+  const setSelectedEdit = (mode: UpdateMode, id?: string) => {
+    setEditMode(mode)
+    setFocusId(id || null)
+  }
+
   useEffect(() => {
-    setSelectedEdit(null)
+    setSelectedEdit("displayOnly")
   }, [advancedMode])
 
   const loaded = users && uid && users[uid]
@@ -66,7 +73,11 @@ function EditRatings({ finish }: Props) {
           {!advancedMode ? (
             <AddNewForm addFn={addRating} />
           ) : (
-            <IconKey />
+            <>
+              {editMode === "displayOnly" && <IconKey />}
+              {editMode === "update" && <EditExisting />}
+              {editMode === "delete" && <ConfirmDelete />}
+            </>
           )}
         </Flex>
       </GridItem>
@@ -76,23 +87,12 @@ function EditRatings({ finish }: Props) {
             <Box>Nothing! Please add something :)</Box>
           )}
           {activeRatings.map((r) => (
-            <Box key={r.id} minH="30px" display="flex" justifyContent="space-between">
-              <Text maxW="200px">{r.text}</Text>
-              {advancedMode && (
-                <Box>
-
-                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Edit text">
-                    <EditIcon />
-                  </Button>
-                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Pause">
-                    <ViewOffIcon />
-                  </Button>
-                  <Button colorScheme="teal" size="xs" ml="10px" aria-label="Delete">
-                    <DeleteIcon />
-                  </Button>
-                </Box>
-              )}
-            </Box>
+            <CurrentTrackingItem
+              key={r.id}
+              {...r}
+              changeMode={setEditMode} 
+              advancedMode={advancedMode}
+            />
           ))}
         </Box>
       </GridItem>

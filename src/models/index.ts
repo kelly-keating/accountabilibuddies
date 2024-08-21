@@ -18,3 +18,5 @@ export interface RatingKeys {
   col?: string
 }
 export type Ratings = Record<string, Record<string, Record<string, number>>>
+
+export type UpdateMode = "displayOnly" | "update" | "delete"

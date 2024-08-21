@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get } from 'firebase/database'
+import { getDatabase, ref, set, get, remove } from 'firebase/database'
 import { FirebaseUser } from '../models'
 import { getUserId } from './auth'
 import { getNextWednesday } from '../dateUtils'
@@ -55,6 +55,13 @@ export function updateRatingThisWeek(ratingId: string, val: number) {
   const ratingRef = ref(db, `ratings/${uid}/${date}/${ratingId}`)
 
   set(ratingRef, val)
+}
+
+export function deleteRatingForever(id: string) {
+  const uid = getUserId()
+  const ratingLabelRef = ref(db, `users/${uid}/ratings/` + id)
+
+  remove(ratingLabelRef)
 }
 
 // ACTIVE USERS

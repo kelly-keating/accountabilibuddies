@@ -1,5 +1,4 @@
 import { Button } from '@chakra-ui/react'
-
 import { useAuth } from '../firebase/contexts/auth'
 import { useGitHubLogout } from '../firebase/hooks/useGitHubLogout'
 

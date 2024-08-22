@@ -1,36 +1,49 @@
-import { useEffect, useState } from 'react'
-import { getUserId } from '../firebase/auth'
-import { useData } from '../firebase/contexts/data'
+import {
+  Box,
+  Heading,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+  Text,
+} from '@chakra-ui/react'
 import { RatingKeys } from '../models'
-import { getNextWednesday } from '../dateUtils'
-import { Box, Heading, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from '@chakra-ui/react'
-import { getGenericColour, lightenColor } from '../colourUtils'
+import { useEffect, useState } from 'react'
+
+import { useData } from '../firebase/contexts/data'
+import { getUserId } from '../firebase/auth'
 import { updateRatingThisWeek } from '../firebase/db'
+import { getNextWednesday } from '../dateUtils'
+import { getGenericColour, lightenColor } from '../colourUtils'
 
 function ThisWeek() {
-  const {users, ratings} = useData()
+  const { users, ratings } = useData()
   const uid = getUserId()
 
   const [currentRatings, setCurrentRatings] = useState<Record<string, number>>({})
   useEffect(() => {
-    if(ratings && uid){
+    if (ratings && uid) {
       const userRatings = ratings[uid] || {}
       const newRatings = userRatings[getNextWednesday()]
       if (newRatings) setCurrentRatings(newRatings)
     }
   }, [ratings, uid])
 
-  if(!users || !uid) return null
+  if (!users || !uid) return null
 
-  const usersActiveRatings = (Object.values(users[uid].ratings) as RatingKeys[]).filter((r) => r.current)
+  const usersActiveRatings = (
+    Object.values(users[uid].ratings) as RatingKeys[]
+  ).filter((r) => r.current)
 
   return (
     <>
-      <Heading as="h2" size="md">This Week</Heading>
+      <Heading as="h2" size="md">
+        This Week
+      </Heading>
       {usersActiveRatings.map((rating, idx) => {
         const col = rating.col || getGenericColour(idx)
         const lightCol = lightenColor(col, 40)
-        
+
         const displayVal = currentRatings[rating.id] || 2
 
         const updateRating = (val: number) => {
@@ -39,9 +52,16 @@ function ThisWeek() {
 
         return (
           <Box key={rating.id}>
-            <Text>{rating.text}: {currentRatings[rating.id] || "-"}</Text>
+            <Text>
+              {rating.text}: {currentRatings[rating.id] || '-'}
+            </Text>
             <Box m="20px">
-              <Slider onChange={updateRating} onClick={() => updateRating(displayVal)} value={displayVal} min={1} max={5} step={1}>
+              <Slider
+                onChange={updateRating}
+                onClick={() => updateRating(displayVal)}
+                value={displayVal}
+                min={1} max={5} step={1}
+              >
                 <SliderTrack bg={lightCol}>
                   <SliderFilledTrack bg={lightCol} />
                 </SliderTrack>

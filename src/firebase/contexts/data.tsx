@@ -8,9 +8,10 @@ import {
   useState,
   useRef,
 } from 'react'
+import { ActiveUsers, AllUsers, Ratings } from '../../models'
+
 import { DataSnapshot, onValue, ref } from 'firebase/database'
 import db from '../db'
-import { ActiveUsers, AllUsers, Ratings } from '../../models'
 
 interface Props {
   children: ReactNode

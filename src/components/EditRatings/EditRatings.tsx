@@ -1,21 +1,16 @@
-import {
-  Button,
-  Heading,
-  Flex,
-  Grid,
-  GridItem,
-  Box,
-} from '@chakra-ui/react'
-import { getUserId } from '../../firebase/auth'
-import { useData } from '../../firebase/contexts/data'
-import { RatingKeys, UpdateMode } from '../../models'
+import { Button, Heading, Flex, Grid, GridItem, Box } from '@chakra-ui/react'
 import { FormEvent, useEffect, useState } from 'react'
+import { UpdateMode } from '../../models'
+
+import { useData } from '../../firebase/contexts/data'
+import { getUserId } from '../../firebase/auth'
 import { addNewUserRating } from '../../firebase/db'
-import IconKey from './IconKey'
+
 import AddNewForm from './AddNewForm'
 import CurrentTrackingItem from './CurrentTrackingItem'
 import ConfirmDelete from './ConfirmDelete'
 import EditExisting from './EditExisting'
+import IconKey from './IconKey'
 
 interface Props {
   finish: () => void
@@ -28,7 +23,7 @@ function EditRatings({ finish }: Props) {
   const [advancedMode, setAdvancedMode] = useState(false)
   const toggleAdvanced = () => setAdvancedMode(!advancedMode)
 
-  const [editMode, setEditMode] = useState<UpdateMode>("displayOnly")
+  const [editMode, setEditMode] = useState<UpdateMode>('displayOnly')
   const [focusId, setFocusId] = useState<string | null>(null)
   const setSelectedEdit = (mode: UpdateMode, id?: string) => {
     setEditMode(mode)
@@ -36,7 +31,7 @@ function EditRatings({ finish }: Props) {
   }
 
   useEffect(() => {
-    setSelectedEdit("displayOnly")
+    setSelectedEdit('displayOnly')
   }, [advancedMode])
 
   const loaded = users && uid && users[uid]
@@ -71,23 +66,25 @@ function EditRatings({ finish }: Props) {
             <AddNewForm addFn={addRating} />
           ) : (
             <>
-              {editMode === "displayOnly" && <IconKey />}
-              {focusId && editMode === "update" && <EditExisting currentId={focusId} setMode={setSelectedEdit} />}
-              {focusId && editMode === "delete" && <ConfirmDelete currentId={focusId} setMode={setSelectedEdit} />}
+              {editMode === 'displayOnly' && <IconKey />}
+              {focusId && editMode === 'update' && (
+                <EditExisting currentId={focusId} setMode={setSelectedEdit} />
+              )}
+              {focusId && editMode === 'delete' && (
+                <ConfirmDelete currentId={focusId} setMode={setSelectedEdit} />
+              )}
             </>
           )}
         </Flex>
       </GridItem>
       <GridItem area="mainList">
         <Box w="1fr">
-          {!allRatings.length && (
-            <Box>Nothing! Please add something :)</Box>
-          )}
+          {!allRatings.length && <Box>Nothing! Please add something :)</Box>}
           {allRatings.map((r) => (
             <CurrentTrackingItem
               key={r.id}
               {...r}
-              changeMode={setSelectedEdit} 
+              changeMode={setSelectedEdit}
               advancedMode={advancedMode}
             />
           ))}

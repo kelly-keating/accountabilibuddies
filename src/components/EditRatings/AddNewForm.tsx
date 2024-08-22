@@ -1,5 +1,13 @@
-import { Button, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
-import { FormEvent } from "react"
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react'
+import { FormEvent } from 'react'
 
 interface Props {
   addFn: (e: FormEvent) => void

@@ -7,8 +7,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { formatDate, getRecentWednesdays } from '../dateUtils'
 import { useData } from '../firebase/contexts/data'
+import { formatDate, getRecentWednesdays } from '../dateUtils'
 import { getGenericColour } from '../colourUtils'
 
 interface Props {
@@ -32,11 +32,7 @@ function UserGraph({ userId }: Props) {
   })
 
   return (
-    <LineChart
-      width={730}
-      height={250}
-      data={data}
-    >
+    <LineChart width={730} height={250} data={data}>
       <CartesianGrid strokeDasharray="2" />
       <XAxis dataKey="date" padding={{ left: 30 }} />
       <YAxis domain={[0, 5]} tickCount={6} />

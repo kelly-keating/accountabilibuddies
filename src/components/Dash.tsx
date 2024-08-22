@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Box, Divider, Flex, Heading } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+
 import { useData } from '../firebase/contexts/data'
 import { useAuth } from '../firebase/contexts/auth'
 import { getUserId } from '../firebase/auth'

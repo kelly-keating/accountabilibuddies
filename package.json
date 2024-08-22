@@ -15,8 +15,8 @@
     "fire-deploy": "firebase deploy",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
     "format": "prettier --write ."
   },
   "eslintConfig": {

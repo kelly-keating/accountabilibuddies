@@ -1,5 +1,3 @@
-import { FirebaseUser } from '../../models'
-import { onAuthStateChanged } from 'firebase/auth'
 import {
   ReactNode,
   createContext,
@@ -7,6 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { FirebaseUser } from '../../models'
+import { onAuthStateChanged } from 'firebase/auth'
 import auth from '../auth'
 
 type PotentialUser = FirebaseUser | null

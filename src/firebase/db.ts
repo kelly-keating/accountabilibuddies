@@ -1,5 +1,6 @@
-import { getDatabase, ref, set, get, remove } from 'firebase/database'
 import { FirebaseUser } from '../models'
+import { getDatabase, ref, set, get, remove } from 'firebase/database'
+
 import { getUserId } from './auth'
 import { getNextWednesday } from '../dateUtils'
 
@@ -49,14 +50,6 @@ export function addNewUserRating(text: string) {
   set(ratingRef, ratingObj)
 }
 
-export function updateRatingThisWeek(ratingId: string, val: number) {
-  const uid = getUserId()
-  const date = getNextWednesday()
-  const ratingRef = ref(db, `ratings/${uid}/${date}/${ratingId}`)
-
-  set(ratingRef, val)
-}
-
 export function updateRatingText(id: string, newText: string) {
   const uid = getUserId()
   const ratingLabelRef = ref(db, `users/${uid}/ratings/${id}/text`)
@@ -76,6 +69,14 @@ export function deleteRatingForever(id: string) {
   const ratingLabelRef = ref(db, `users/${uid}/ratings/` + id)
 
   remove(ratingLabelRef)
+}
+
+export function updateRatingThisWeek(ratingId: string, val: number) {
+  const uid = getUserId()
+  const date = getNextWednesday()
+  const ratingRef = ref(db, `ratings/${uid}/${date}/${ratingId}`)
+
+  set(ratingRef, val)
 }
 
 // ACTIVE USERS

@@ -1,5 +1,5 @@
-import { DeleteIcon, EditIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
-import { List, ListIcon, ListItem } from "@chakra-ui/react"
+import { DeleteIcon, EditIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { List, ListIcon, ListItem } from '@chakra-ui/react'
 
 function IconKey() {
   return (

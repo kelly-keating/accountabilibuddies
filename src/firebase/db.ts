@@ -57,6 +57,20 @@ export function updateRatingThisWeek(ratingId: string, val: number) {
   set(ratingRef, val)
 }
 
+export function updateRatingText(id: string, newText: string) {
+  const uid = getUserId()
+  const ratingLabelRef = ref(db, `users/${uid}/ratings/${id}/text`)
+
+  set(ratingLabelRef, newText)
+}
+
+export function updateRatingActive(id: string, newState: boolean) {
+  const uid = getUserId()
+  const ratingLabelRef = ref(db, `users/${uid}/ratings/${id}/current`)
+
+  set(ratingLabelRef, newState)
+}
+
 export function deleteRatingForever(id: string) {
   const uid = getUserId()
   const ratingLabelRef = ref(db, `users/${uid}/ratings/` + id)

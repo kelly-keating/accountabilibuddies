@@ -42,10 +42,7 @@ function EditRatings({ finish }: Props) {
   const loaded = users && uid && users[uid]
   if (!loaded) return null
 
-  const allRatings = users[uid].ratings
-  const activeRatings = allRatings
-    ? (Object.values(allRatings) as RatingKeys[]).filter((r) => r.current)
-    : []
+  const allRatings = Object.values(users[uid].ratings)
 
   const addRating = (e: FormEvent) => {
     e.preventDefault()
@@ -75,22 +72,22 @@ function EditRatings({ finish }: Props) {
           ) : (
             <>
               {editMode === "displayOnly" && <IconKey />}
-              {editMode === "update" && <EditExisting />}
-              {editMode === "delete" && <ConfirmDelete />}
+              {focusId && editMode === "update" && <EditExisting currentId={focusId} setMode={setSelectedEdit} />}
+              {focusId && editMode === "delete" && <ConfirmDelete currentId={focusId} setMode={setSelectedEdit} />}
             </>
           )}
         </Flex>
       </GridItem>
       <GridItem area="mainList">
         <Box w="1fr">
-          {!activeRatings.length && (
+          {!allRatings.length && (
             <Box>Nothing! Please add something :)</Box>
           )}
-          {activeRatings.map((r) => (
+          {allRatings.map((r) => (
             <CurrentTrackingItem
               key={r.id}
               {...r}
-              changeMode={setEditMode} 
+              changeMode={setSelectedEdit} 
               advancedMode={advancedMode}
             />
           ))}
@@ -98,12 +95,14 @@ function EditRatings({ finish }: Props) {
       </GridItem>
       <GridItem area="blank" />
       <GridItem area="footer">
-        <Button onClick={finish} colorScheme="teal" mr="10px">
-          Finish
-        </Button>
         <Button onClick={toggleAdvanced} mr="10px">
           {advancedMode ? 'Hide Advanced' : 'Advanced Edit'}
         </Button>
+        {!advancedMode && (
+          <Button onClick={finish} colorScheme="teal" mr="10px">
+            Finish
+          </Button>
+        )}
       </GridItem>
     </Grid>
   )

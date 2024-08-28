@@ -12,10 +12,11 @@ import {
 
 interface Props {
   closeModal: () => void
-  openAddRatings: () => void
 }
 
-function RatingsPopup({ closeModal, openAddRatings }: Props) {
+function RatingsPopup({ closeModal }: Props) {
+  const openAddRatings = () => {} // TODO: do something
+
   const theySaidYes = () => {
     openAddRatings()
     closeModal()

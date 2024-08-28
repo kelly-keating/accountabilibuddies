@@ -44,3 +44,19 @@ export const formatDate = {
     return [year, month, day].join('-')
   },
 }
+
+function compareDate(dateStr: string, fn: (givenDate: Date, today: Date) => boolean) {
+  const inputDate = new Date(dateStr)
+  const currentDate = new Date()
+  // compare date only, ignore time of day
+  inputDate.setHours(0, 0, 0, 0)
+  currentDate.setHours(0, 0, 0, 0)
+
+  return fn(inputDate, currentDate)
+}
+
+export const dateIs = {
+  past: (date: string) => compareDate(date, (givenDate, today) => givenDate < today),
+  today: (date: string) => compareDate(date, (givenDate, today) => givenDate.toDateString() === today.toDateString()),
+  future: (date: string) => compareDate(date, (givenDate, today) => givenDate > today),
+}

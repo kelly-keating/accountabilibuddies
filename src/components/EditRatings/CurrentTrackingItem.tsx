@@ -28,7 +28,7 @@ function CurrentTrackingItem({ id, text, current, advancedMode, changeMode }: Pr
             aria-label="Pause"
             size="xs" ml="10px"
           >
-            {current ? <ViewIcon /> : <ViewOffIcon />}
+            {current ? <ViewOffIcon /> : <ViewIcon />}
           </Button>
           <Button
             onClick={() => changeMode('update', id)}

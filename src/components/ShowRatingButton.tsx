@@ -1,15 +1,17 @@
 import { Button } from '@chakra-ui/react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-interface Props {
-  showEdit: boolean
-  openEdit: () => void
-  closeEdit: () => void
-}
+function ShowRatingButton() {
+  const { pathname } = useLocation()
+  const goTo = useNavigate()
 
-function ShowRatingButton({ showEdit, openEdit, closeEdit }: Props) {
+  const isEditPage = pathname.includes("goals")
+  const closeEdit = () => goTo("/")
+  const openEdit = () => goTo("/goals?edit=true")
+
   return (
-    <Button as="button" onClick={showEdit ? closeEdit : openEdit} mr="10px">
-      {showEdit ? 'Cancel Edit' : 'Edit your entries'}
+    <Button as="button" onClick={isEditPage ? closeEdit : openEdit} mr="10px">
+      {isEditPage ? 'Cancel Edit' : 'Edit your entries'}
     </Button>
   )
 }

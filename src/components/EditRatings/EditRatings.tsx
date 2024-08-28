@@ -1,5 +1,6 @@
 import { Button, Heading, Flex, Grid, GridItem, Box } from '@chakra-ui/react'
 import { FormEvent, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UpdateMode } from '../../models'
 
 import { useData } from '../../firebase/contexts/data'
@@ -12,13 +13,12 @@ import ConfirmDelete from './ConfirmDelete'
 import EditExisting from './EditExisting'
 import IconKey from './IconKey'
 
-interface Props {
-  finish: () => void
-}
-
-function EditRatings({ finish }: Props) {
+function EditRatings() {
   const { users } = useData()
   const uid = getUserId()
+
+  const goTo = useNavigate()
+  const finish = () => goTo('/')
 
   const [advancedMode, setAdvancedMode] = useState(false)
   const toggleAdvanced = () => setAdvancedMode(!advancedMode)

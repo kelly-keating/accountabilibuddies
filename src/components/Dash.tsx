@@ -1,17 +1,15 @@
-import { Box, Divider, Flex, Heading } from '@chakra-ui/react'
+import { Box, Flex, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { useData } from '../firebase/contexts/data'
 import { useAuth } from '../firebase/contexts/auth'
 import { getUserId } from '../firebase/auth'
 
-import EditRatings from './EditRatings/EditRatings'
-import GraphDisplayList from './GraphDisplayList'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
 import NewUserPopup from './NewUserPopup'
 import ShowRatingButton from './ShowRatingButton'
-import ThisWeek from './ThisWeek'
 
 function Dash() {
   const user = useAuth()
@@ -19,10 +17,6 @@ function Dash() {
 
   const [showNewUserPrompt, setNewUserPrompt] = useState(false)
   const closePopup = () => { setNewUserPrompt(false) }
-
-  const [showEditRatings, setShowEditRatings] = useState(false)
-  const openEditRatings = () => { setShowEditRatings(true) }
-  const closeEditRatings = () => { setShowEditRatings(false) }
 
   useEffect(() => {
     const uid = getUserId()
@@ -40,11 +34,7 @@ function Dash() {
         <Heading id="honk-hard-font">Accountabilibuddies</Heading>
 
         <Flex align="center">
-          <ShowRatingButton
-            showEdit={showEditRatings}
-            openEdit={openEditRatings}
-            closeEdit={closeEditRatings}
-          />
+          <ShowRatingButton />
           <LoginButton />
           <LogoutButton />
         </Flex>
@@ -52,19 +42,12 @@ function Dash() {
 
       {/* TODO: make this box grow/shrink & centered */}
       <Box mt="80px">
-        {showEditRatings ? (
-          <EditRatings finish={closeEditRatings} />
-        ) : (
-          <ThisWeek />
-        )}
-        <Divider marginY="20px" />
-        <GraphDisplayList />
+        <Outlet />
       </Box>
 
       {showNewUserPrompt && (
         <NewUserPopup
           closeModal={closePopup}
-          openAddRatings={openEditRatings}
         />
       )}
     </>

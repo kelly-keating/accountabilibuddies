@@ -13,7 +13,13 @@ interface Props {
   changeMode: (mode: UpdateMode, id?: string) => void
 }
 
-function CurrentTrackingItem({ id, text, current, advancedMode, changeMode }: Props) {
+function CurrentTrackingItem({
+  id,
+  text,
+  current,
+  advancedMode,
+  changeMode,
+}: Props) {
   const buttonCol = current ? 'teal' : 'gray'
   return (
     <Box minH="30px" display="flex" justifyContent="space-between">
@@ -26,7 +32,8 @@ function CurrentTrackingItem({ id, text, current, advancedMode, changeMode }: Pr
             onClick={() => updateRatingActive(id, !current)}
             colorScheme={buttonCol}
             aria-label="Pause"
-            size="xs" ml="10px"
+            size="xs"
+            ml="10px"
           >
             {current ? <ViewOffIcon /> : <ViewIcon />}
           </Button>
@@ -34,7 +41,8 @@ function CurrentTrackingItem({ id, text, current, advancedMode, changeMode }: Pr
             onClick={() => changeMode('update', id)}
             colorScheme={buttonCol}
             aria-label="Edit text"
-            size="xs" ml="10px"
+            size="xs"
+            ml="10px"
           >
             <EditIcon />
           </Button>
@@ -42,7 +50,8 @@ function CurrentTrackingItem({ id, text, current, advancedMode, changeMode }: Pr
             onClick={() => changeMode('delete', id)}
             colorScheme={buttonCol}
             aria-label="Delete"
-            size="xs" ml="10px"
+            size="xs"
+            ml="10px"
           >
             <DeleteIcon />
           </Button>

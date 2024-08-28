@@ -79,6 +79,15 @@ export function updateRatingThisWeek(ratingId: string, val: number) {
   set(ratingRef, val)
 }
 
+// GOALS
+
+export function setGoalComplete(date: string, status: boolean) {
+  const uid = getUserId()
+  const goalRef = ref(db, `goals/${uid}/${date}/completed`)
+
+  set(goalRef, status)
+}
+
 // ACTIVE USERS
 
 export function setUserActive(uid: string) {

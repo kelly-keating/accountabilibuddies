@@ -87,7 +87,9 @@ export const DataProvider = ({ children }: Props) => {
   }, [])
 
   return (
-    <DataContext.Provider value={{ activeUsers, goals, ratings, users, loading }}>
+    <DataContext.Provider
+      value={{ activeUsers, goals, ratings, users, loading }}
+    >
       {children}
     </DataContext.Provider>
   )

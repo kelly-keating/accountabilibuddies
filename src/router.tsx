@@ -6,13 +6,15 @@ import Main from './components/Main'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Dash />,
     children: [
       { index: true, element: <Main /> },
-      { path: "goals", element: <Goals /> },
-    ]
-  }
+      { path: 'goals/:id', element: <Goals /> },
+    ],
+  },
 ])
+// TODO: add redirect to home on bogus link
+// TODO: add redirect to your goals on /goals
 
 export default router

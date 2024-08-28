@@ -45,7 +45,10 @@ export const formatDate = {
   },
 }
 
-function compareDate(dateStr: string, fn: (givenDate: Date, today: Date) => boolean) {
+function compareDate(
+  dateStr: string,
+  fn: (givenDate: Date, today: Date) => boolean,
+) {
   const inputDate = new Date(dateStr)
   const currentDate = new Date()
   // compare date only, ignore time of day

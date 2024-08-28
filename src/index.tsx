@@ -16,6 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <RouterProvider router={router} />
         </ChakraProvider>
       </DataProvider>
-    </AuthProvider>
+    </AuthProvider>,
   )
 })

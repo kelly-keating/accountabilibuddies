@@ -1,6 +1,6 @@
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
 import { useData } from '../firebase/contexts/data'
 import { useAuth } from '../firebase/contexts/auth'
@@ -9,21 +9,24 @@ import { getUserId } from '../firebase/auth'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
 import NewUserPopup from './NewUserPopup'
-import ShowRatingButton from './ShowRatingButton'
+import ToggleEditButton from './ToggleEditButton'
 
 function Dash() {
   const user = useAuth()
   const { users } = useData()
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
 
   const [showNewUserPrompt, setNewUserPrompt] = useState(false)
   const closePopup = () => { setNewUserPrompt(false) }
 
+  const uid = getUserId()
+
   useEffect(() => {
-    const uid = getUserId()
     if (users && uid && !users[uid].ratings) {
       setNewUserPrompt(true)
     }
-  }, [user, users])
+  }, [uid, user, users])
 
   return (
     <>
@@ -34,7 +37,16 @@ function Dash() {
         <Heading id="honk-hard-font">Accountabilibuddies</Heading>
 
         <Flex align="center">
-          <ShowRatingButton />
+          <Button
+            as={Link}
+            to={onHome ? '/goals/' + uid : '/'}
+            colorScheme="teal"
+            variant="solid"
+            mr="10px"
+          >
+            {onHome ? 'View goals' : 'Home'}
+          </Button>
+          {onHome && <ToggleEditButton />}
           <LoginButton />
           <LogoutButton />
         </Flex>
@@ -45,11 +57,7 @@ function Dash() {
         <Outlet />
       </Box>
 
-      {showNewUserPrompt && (
-        <NewUserPopup
-          closeModal={closePopup}
-        />
-      )}
+      {showNewUserPrompt && <NewUserPopup closeModal={closePopup} />}
     </>
   )
 }

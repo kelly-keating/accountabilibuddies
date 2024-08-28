@@ -9,13 +9,15 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   closeModal: () => void
 }
 
 function RatingsPopup({ closeModal }: Props) {
-  const openAddRatings = () => {} // TODO: do something
+  const goTo = useNavigate()
+  const openAddRatings = () => goTo('/?edit=true')
 
   const theySaidYes = () => {
     openAddRatings()

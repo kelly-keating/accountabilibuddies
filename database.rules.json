@@ -6,6 +6,12 @@
         ".write": "$uid === auth.uid || root.child('admins').child(auth.uid).exists()"
       }
     },
+    "goals": {
+      ".read": true,
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
+    },
     "ratings": {
       ".read": true,
       "$uid": {

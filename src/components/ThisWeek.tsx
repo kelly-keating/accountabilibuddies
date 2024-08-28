@@ -7,7 +7,7 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-import { RatingKeys } from '../models'
+import { RatingKey } from '../models'
 import { useEffect, useState } from 'react'
 
 import { useData } from '../firebase/contexts/data'
@@ -32,7 +32,7 @@ function ThisWeek() {
   if (!users || !uid) return null
 
   const usersActiveRatings = (
-    Object.values(users[uid].ratings) as RatingKeys[]
+    Object.values(users[uid].ratings) as RatingKey[]
   ).filter((r) => r.current)
 
   return (

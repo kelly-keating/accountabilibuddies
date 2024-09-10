@@ -1,22 +1,15 @@
-import {
-  Box,
-  ButtonGroup,
-  IconButton,
-  ListItem,
-  Textarea,
-  UnorderedList,
-} from '@chakra-ui/react'
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
+import { Box, Heading, ListItem, UnorderedList } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
-import { Goal } from '../models'
 
 import { useAuth } from '../firebase/contexts/auth'
 import { useData } from '../firebase/contexts/data'
 import { getUserId } from '../firebase/auth'
-import { setGoalComplete } from '../firebase/db'
+import { getGoalCompletedCol } from '../colourUtils'
 import { dateIs, formatDate } from '../dateUtils'
 
 import GraphDisplay from './GraphDisplay'
+import GoalsTextEdit from './GoalsTextEdit'
+import CompletedToggle from './utils/CompletedToggle'
 
 function Goals() {
   const user = useAuth()
@@ -26,54 +19,36 @@ function Goals() {
 
   if (!user) return null // TODO: once auth loaded, redirect home if no
   if (!id) return null
-
-  const userGoals = Object.values(goals && id ? goals[id] : {}).sort(
-    (a, b) => -a.date.localeCompare(b.date),
-  )
-  const getCol = (goal: Goal) => {
-    if (goal.completed !== undefined) {
-      return goal.completed ? 'green' : 'red'
-    }
-    return 'black'
-  }
-  const isFuture = (g: Goal) => dateIs.future(g.date)
   const isYourGoals = uid === id
+
+  let displayGoals = Object.values(goals && id ? goals[id] : {}).sort(
+    (a, b) => -a.date.localeCompare(b.date),
+  ) // -1 to reverse order
+  if (isYourGoals) {
+    displayGoals = displayGoals.filter((goal) => dateIs.past(goal.date))
+  }
 
   return (
     <>
       <GraphDisplay id={id} />
 
-      <Textarea />
+      {isYourGoals && <GoalsTextEdit />}
 
+      <Heading as="h3">{isYourGoals ? 'Past goals' : 'Goals'}</Heading>
       <Box>
         <UnorderedList styleType="none" marginInlineStart="0">
-          {userGoals.map((g) => (
+          {displayGoals.map((g) => (
             <ListItem
               key={g.date}
-              color={getCol(g)}
+              color={getGoalCompletedCol(g)}
               display="flex"
               alignItems="center"
               marginY="5px"
             >
-              {isYourGoals && (
-                <ButtonGroup size="sm" isAttached variant="solid" mr="5px">
-                  <IconButton
-                    aria-label="mark completed"
-                    icon={<CheckIcon />}
-                    onClick={() => setGoalComplete(g.date, true)}
-                    colorScheme={g.completed ? 'green' : 'gray'}
-                    isDisabled={isFuture(g)}
-                  />
-                  <IconButton
-                    aria-label="mark incomplete"
-                    icon={<CloseIcon />}
-                    onClick={() => setGoalComplete(g.date, false)}
-                    colorScheme={g.completed === false ? 'red' : 'gray'}
-                    isDisabled={isFuture(g)}
-                  />
-                </ButtonGroup>
-              )}
-              {isFuture(g) ? 'Next week' : formatDate.firebaseToDisplay(g.date)}
+              {isYourGoals && <CompletedToggle goal={g} />}
+              {dateIs.future(g.date)
+                ? 'This week'
+                : formatDate.firebaseToDisplay(g.date)}
               : {g.text}
             </ListItem>
           ))}

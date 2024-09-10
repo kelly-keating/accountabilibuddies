@@ -1,3 +1,6 @@
+import { dateIs } from './dateUtils'
+import { Goal } from './models'
+
 export function lightenColor(hex: string, percent: number) {
   let r = parseInt(hex.slice(1, 3), 16)
   let g = parseInt(hex.slice(3, 5), 16)
@@ -24,4 +27,15 @@ export function getGenericColour(idx: number) {
     '#84d8d6',
   ]
   return cols[idx % cols.length]
+}
+
+export function showAsIncomplete(goal: Goal) {
+  if (goal.completed === false) return true
+  if (!goal.completed && dateIs.past(goal.date)) return true
+  return false
+}
+export function getGoalCompletedCol(goal: Goal) {
+  if (goal.completed) return 'green'
+  if (showAsIncomplete(goal)) return 'red'
+  return 'black'
 }

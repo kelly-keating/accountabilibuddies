@@ -7,13 +7,13 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-import { RatingKey } from '../models'
 import { useEffect, useState } from 'react'
+import { RatingKey } from '../models'
 
 import { useData } from '../firebase/contexts/data'
 import { getUserId } from '../firebase/auth'
 import { updateRatingThisWeek } from '../firebase/db'
-import { getNextWednesday } from '../dateUtils'
+import { getThisWednesday } from '../dateUtils'
 import { getGenericColour, lightenColor } from '../colourUtils'
 
 function ThisWeek() {
@@ -24,7 +24,7 @@ function ThisWeek() {
   useEffect(() => {
     if (ratings && uid) {
       const userRatings = ratings[uid] || {}
-      const newRatings = userRatings[getNextWednesday()]
+      const newRatings = userRatings[getThisWednesday()]
       if (newRatings) setCurrentRatings(newRatings)
     }
   }, [ratings, uid])

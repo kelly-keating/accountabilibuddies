@@ -2,9 +2,7 @@ import { FirebaseUser } from '../models'
 import { getDatabase, ref, set, get, remove } from 'firebase/database'
 
 import { getUserId } from './auth'
-import { getNextWednesday } from '../dateUtils'
-
-// import { getUserId } from './auth'
+import { getNextWednesday, getThisWednesday } from '../dateUtils'
 
 const db = getDatabase()
 export default db
@@ -73,13 +71,34 @@ export function deleteRatingForever(id: string) {
 
 export function updateRatingThisWeek(ratingId: string, val: number) {
   const uid = getUserId()
-  const date = getNextWednesday()
+  const date = getThisWednesday()
   const ratingRef = ref(db, `ratings/${uid}/${date}/${ratingId}`)
 
   set(ratingRef, val)
 }
 
 // GOALS
+
+export function addNewGoal(text: string) {
+  const uid = getUserId()
+  const date = getNextWednesday()
+  const goalRef = ref(db, `goals/${uid}/${date}`)
+
+  const newGoal = {
+    text,
+    date,
+  }
+
+  set(goalRef, newGoal)
+}
+
+export function updateGoalText(text: string) {
+  const uid = getUserId()
+  const date = getNextWednesday()
+  const goalRef = ref(db, `goals/${uid}/${date}/text`)
+
+  set(goalRef, text)
+}
 
 export function setGoalComplete(date: string, status: boolean) {
   const uid = getUserId()

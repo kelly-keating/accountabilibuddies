@@ -1,30 +1,17 @@
-export function getRecentWednesdays() {
-  const now = new Date()
-  const currentDay = now.getDay()
-  const daysSinceLastWednesday = (currentDay - 3 + 7) % 7 || 7
+const weekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+] as const
+const meetingOn = 'Wednesday' // <---- Update as needed
 
-  const lastWednesday = new Date()
-  lastWednesday.setDate(now.getDate() - daysSinceLastWednesday)
-
-  const recentWednesdays = [getNextWednesday()]
-
-  for (let i = 0; i < 4; i++) {
-    recentWednesdays.push(formatDate.dateToString(lastWednesday))
-    lastWednesday.setDate(lastWednesday.getDate() - 7)
-  }
-
-  return recentWednesdays
-}
-
-export function getNextWednesday() {
-  const now = new Date()
-  const currentDay = now.getDay()
-  // btw - Wednesday is day 3 in week
-  const daysUntilWednesday = (3 - currentDay + 7) % 7
-
-  const nextWednesday = new Date(now)
-  nextWednesday.setDate(now.getDate() + daysUntilWednesday)
-  return formatDate.dateToString(nextWednesday)
+export const meetingDay = {
+  text: meetingOn,
+  num: weekdays.indexOf(meetingOn),
 }
 
 export const formatDate = {
@@ -45,6 +32,60 @@ export const formatDate = {
   },
 }
 
+export const dateIs = {
+  past: (date: string) =>
+    compareDate(date, (givenDate, today) => givenDate < today),
+  today: (date: string) =>
+    compareDate(
+      date,
+      (givenDate, today) => givenDate.toDateString() === today.toDateString(),
+    ),
+  future: (date: string) =>
+    compareDate(date, (givenDate, today) => givenDate > today),
+}
+
+export function getThisWednesday() {
+  return findComingWednesday(true)
+}
+
+export function getNextWednesday() {
+  return findComingWednesday(false)
+}
+
+export function getRecentWednesdays() {
+  const now = new Date()
+  const currentDay = now.getDay()
+  const daysSinceLastWednesday = (currentDay - meetingDay.num + 7) % 7 || 7
+
+  const lastWednesday = new Date()
+  lastWednesday.setDate(now.getDate() - daysSinceLastWednesday)
+
+  const recentWednesdays = [getThisWednesday()]
+
+  for (let i = 0; i < 4; i++) {
+    recentWednesdays.push(formatDate.dateToString(lastWednesday))
+    lastWednesday.setDate(lastWednesday.getDate() - 7)
+  }
+
+  return recentWednesdays
+}
+
+// ----- INTERNAL TOOLS -----
+
+function findComingWednesday(todayInclusive: boolean) {
+  const now = new Date()
+  const currentDay = now.getDay()
+
+  let daysUntilWednesday = (meetingDay.num - currentDay + 7) % 7
+  if (!todayInclusive && daysUntilWednesday === 0) {
+    daysUntilWednesday = 7
+  }
+
+  const nextWednesday = new Date(now)
+  nextWednesday.setDate(now.getDate() + daysUntilWednesday)
+  return formatDate.dateToString(nextWednesday)
+}
+
 function compareDate(
   dateStr: string,
   fn: (givenDate: Date, today: Date) => boolean,
@@ -56,10 +97,4 @@ function compareDate(
   currentDate.setHours(0, 0, 0, 0)
 
   return fn(inputDate, currentDate)
-}
-
-export const dateIs = {
-  past: (date: string) => compareDate(date, (givenDate, today) => givenDate < today),
-  today: (date: string) => compareDate(date, (givenDate, today) => givenDate.toDateString() === today.toDateString()),
-  future: (date: string) => compareDate(date, (givenDate, today) => givenDate > today),
 }

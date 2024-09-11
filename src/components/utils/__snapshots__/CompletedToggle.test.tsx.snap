@@ -1,0 +1,301 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CompletedToggle Component > calls setGoalComplete > only when enabled buttons are clicked 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CompletedToggle Component > calls setGoalComplete > when mark incomplete is clicked 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CompletedToggle Component > renders buttons with correct state > when completion is unknown 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CompletedToggle Component > renders buttons with correct state > when goal data changes 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CompletedToggle Component > renders buttons with correct state > when goal is complete 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CompletedToggle Component > renders buttons with correct state > when goal is incomplete 1`] = `
+<div>
+  <div
+    class="chakra-button__group css-1a99rsg"
+    data-attached=""
+    data-orientation="horizontal"
+    role="group"
+  >
+    <button
+      aria-label="mark completed"
+      class="chakra-button css-24qtlu"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 14 14"
+      >
+        <g
+          fill="currentColor"
+        >
+          <polygon
+            points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      aria-label="mark incomplete"
+      class="chakra-button css-24qtlu"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="chakra-icon css-onkibi"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;

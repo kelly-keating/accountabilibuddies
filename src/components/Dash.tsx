@@ -9,7 +9,7 @@ import { getUserId } from '../firebase/auth'
 import LoginButton from './Login'
 import LogoutButton from './Logout'
 import NewUserPopup from './NewUserPopup'
-import ToggleEditButton from './ToggleEditButton'
+import ToggleEditButton from './utils/ToggleEditButton'
 
 function Dash() {
   const user = useAuth()

@@ -2,15 +2,15 @@ import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Link, useLocation } from 'react-router-dom'
 
-import { useData } from '../firebase/contexts/data'
+import { useData } from '../../firebase/contexts/data'
 
-import UserGraph from './UserGraph'
+import LineGraph from './LineGraph'
 
 interface Props {
   id: string
 }
 
-function GraphDisplay({ id }: Props) {
+function UserGraphDisplay({ id }: Props) {
   const { users } = useData()
   const { pathname } = useLocation()
 
@@ -35,7 +35,7 @@ function GraphDisplay({ id }: Props) {
             )}
           </Flex>
           <Box marginY="10px">
-            <UserGraph userId={id} />
+            <LineGraph userId={id} />
           </Box>
         </Box>
       )}
@@ -43,4 +43,4 @@ function GraphDisplay({ id }: Props) {
   )
 }
 
-export default GraphDisplay
+export default UserGraphDisplay

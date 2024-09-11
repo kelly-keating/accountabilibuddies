@@ -1,9 +1,9 @@
 import { Box, Button, Heading, Text } from '@chakra-ui/react'
-import { UpdateMode } from '../../models'
+import { UpdateMode } from '../../../models'
 
-import { useData } from '../../firebase/contexts/data'
-import { getUserId } from '../../firebase/auth'
-import { deleteRatingForever } from '../../firebase/db'
+import { useData } from '../../../firebase/contexts/data'
+import { getUserId } from '../../../firebase/auth'
+import { deleteRatingForever } from '../../../firebase/db'
 
 interface Props {
   currentId: string

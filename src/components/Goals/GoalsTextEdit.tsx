@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -10,14 +11,14 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FormEvent, useEffect, useState } from 'react'
-import { Goal } from '../models'
+import { Goal } from '../../models'
 
-import { useData } from '../firebase/contexts/data'
-import { getUserId } from '../firebase/auth'
-import { addNewGoal, updateGoalText } from '../firebase/db'
-import { dateIs, getNextWednesday, getThisWednesday } from '../dateUtils'
+import { useData } from '../../firebase/contexts/data'
+import { getUserId } from '../../firebase/auth'
+import { addNewGoal, updateGoalText } from '../../firebase/db'
+import { dateIs, getNextWednesday, getThisWednesday } from '../../dateUtils'
 
-import CompletedToggle from './utils/CompletedToggle'
+import CompletedToggle from '../utils/CompletedToggle'
 
 function GoalsTextEdit() {
   const { goals } = useData()
@@ -59,12 +60,14 @@ function GoalsTextEdit() {
             {thisGoal?.text || 'Nothing! Enter something for next week :P'}
           </Text>
           {thisGoal && (
-            <Text>
+            <Flex marginY="20px">
               <CompletedToggle goal={thisGoal} />
-              {thisGoal.completed && 'Nicely done 💪'}
-              {thisGoal.completed === false && 'You can always mark this done later 🏋️'}
-              {thisGoal.completed === undefined && 'Did you achieve what you wanted? How did it go?'}
-            </Text>
+              <Text>
+                {thisGoal.completed && 'Nicely done 💪'}
+                {thisGoal.completed === false && 'You can always mark this done later 🏋️'}
+                {thisGoal.completed === undefined && 'Did you achieve what you wanted? How did it go?'}
+              </Text>
+            </Flex>
           )}
           <Heading as="h3" mt="20px">
             Next week

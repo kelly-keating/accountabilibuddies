@@ -8,13 +8,13 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { RatingKey } from '../models'
+import { RatingKey } from '../../models'
 
-import { useData } from '../firebase/contexts/data'
-import { getUserId } from '../firebase/auth'
-import { updateRatingThisWeek } from '../firebase/db'
-import { getThisWednesday } from '../dateUtils'
-import { getGenericColour, lightenColor } from '../colourUtils'
+import { useData } from '../../firebase/contexts/data'
+import { getUserId } from '../../firebase/auth'
+import { updateRatingThisWeek } from '../../firebase/db'
+import { getThisWednesday } from '../../dateUtils'
+import { getGenericColour, lightenColor } from '../../colourUtils'
 
 function ThisWeek() {
   const { users, ratings } = useData()

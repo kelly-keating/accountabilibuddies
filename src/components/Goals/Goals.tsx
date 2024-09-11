@@ -1,15 +1,15 @@
 import { Box, Heading, ListItem, UnorderedList } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 
-import { useAuth } from '../firebase/contexts/auth'
-import { useData } from '../firebase/contexts/data'
-import { getUserId } from '../firebase/auth'
-import { getGoalCompletedCol } from '../colourUtils'
-import { dateIs, formatDate } from '../dateUtils'
+import { useAuth } from '../../firebase/contexts/auth'
+import { useData } from '../../firebase/contexts/data'
+import { getUserId } from '../../firebase/auth'
+import { getGoalCompletedCol } from '../../colourUtils'
+import { dateIs, formatDate } from '../../dateUtils'
 
-import GraphDisplay from './GraphDisplay'
+import UserGraphDisplay from '../utils/UserGraphDisplay'
 import GoalsTextEdit from './GoalsTextEdit'
-import CompletedToggle from './utils/CompletedToggle'
+import CompletedToggle from '../utils/CompletedToggle'
 
 function Goals() {
   const user = useAuth()
@@ -30,7 +30,7 @@ function Goals() {
 
   return (
     <>
-      <GraphDisplay id={id} />
+      <UserGraphDisplay id={id} />
 
       {isYourGoals && <GoalsTextEdit />}
 

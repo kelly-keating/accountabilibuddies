@@ -1,11 +1,11 @@
 import { Button, Heading, Flex, Grid, GridItem, Box } from '@chakra-ui/react'
 import { FormEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { UpdateMode } from '../../models'
+import { UpdateMode } from '../../../models'
 
-import { useData } from '../../firebase/contexts/data'
-import { getUserId } from '../../firebase/auth'
-import { addNewUserRating } from '../../firebase/db'
+import { useData } from '../../../firebase/contexts/data'
+import { getUserId } from '../../../firebase/auth'
+import { addNewUserRating } from '../../../firebase/db'
 
 import AddNewForm from './AddNewForm'
 import CurrentTrackingItem from './CurrentTrackingItem'

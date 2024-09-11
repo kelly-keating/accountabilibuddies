@@ -8,11 +8,11 @@ import {
   InputRightElement,
 } from '@chakra-ui/react'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { UpdateMode } from '../../models'
+import { UpdateMode } from '../../../models'
 
-import { useData } from '../../firebase/contexts/data'
-import { getUserId } from '../../firebase/auth'
-import { updateRatingText } from '../../firebase/db'
+import { useData } from '../../../firebase/contexts/data'
+import { getUserId } from '../../../firebase/auth'
+import { updateRatingText } from '../../../firebase/db'
 
 interface Props {
   currentId: string

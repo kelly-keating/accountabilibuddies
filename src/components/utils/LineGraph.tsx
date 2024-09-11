@@ -7,15 +7,15 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { useData } from '../firebase/contexts/data'
-import { formatDate, getRecentWednesdays } from '../dateUtils'
-import { getGenericColour } from '../colourUtils'
+import { useData } from '../../firebase/contexts/data'
+import { formatDate, getRecentWednesdays } from '../../dateUtils'
+import { getGenericColour } from '../../colourUtils'
 
 interface Props {
   userId: string
 }
 
-function UserGraph({ userId }: Props) {
+function LineGraph({ userId }: Props) {
   const { users, ratings } = useData()
   const userKeys = (users && users[userId] && users[userId].ratings) || {}
   const userKeyId = Object.keys(userKeys)
@@ -53,4 +53,4 @@ function UserGraph({ userId }: Props) {
   )
 }
 
-export default UserGraph
+export default LineGraph

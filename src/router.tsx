@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import Dash from './components/Dash'
-import Goals from './components/Goals'
-import Main from './components/Main'
+import Goals from './components/Goals/Goals'
+import Main from './components/HomePage/Main'
 
 const router = createBrowserRouter([
   {

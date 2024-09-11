@@ -1,10 +1,10 @@
 import { Divider } from '@chakra-ui/react'
 import { useMemo } from 'react'
 
-import { useData } from '../firebase/contexts/data'
+import { useData } from '../../firebase/contexts/data'
 
 import EditRatings from './EditRatings/EditRatings'
-import GraphDisplay from './GraphDisplay'
+import UserGraphDisplay from '../utils/UserGraphDisplay'
 import ThisWeek from './ThisWeek'
 
 function Main() {
@@ -21,7 +21,7 @@ function Main() {
       <Divider marginY="20px" />
 
       {activeIds.map((id) => (
-        <GraphDisplay key={id} id={id} />
+        <UserGraphDisplay key={id} id={id} />
       ))}
     </>
   )

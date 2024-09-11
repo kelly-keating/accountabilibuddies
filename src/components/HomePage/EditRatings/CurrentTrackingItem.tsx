@@ -1,8 +1,8 @@
 import { DeleteIcon, EditIcon, ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 import { Button, Box, Text } from '@chakra-ui/react'
-import { UpdateMode } from '../../models'
+import { UpdateMode } from '../../../models'
 
-import { updateRatingActive } from '../../firebase/db'
+import { updateRatingActive } from '../../../firebase/db'
 
 interface Props {
   id: string

@@ -19,16 +19,16 @@ describe('formatDate', () => {
     it('converts YYYY-MM-DD to DD/MM/YYYY format', () => {
       const input = '2024-12-18'
       const converted = dateUtils.formatDate.firebaseToDisplay(input)
-  
+
       expect(converted).toBe('18/12/2024')
     })
   })
-  
+
   describe('displayToFirebase', () => {
     it('converts DD/MM/YYYY to YYYY-MM-DD format', () => {
       const input = '18/12/2024'
       const converted = dateUtils.formatDate.displayToFirebase(input)
-  
+
       expect(converted).toBe('2024-12-18')
     })
   })
@@ -95,25 +95,36 @@ describe('find wednesdays', () => {
   })
 
   afterAll(() => {
-    (global.Date as DateType) = OriginalDate
+    global.Date = OriginalDate
   })
 
-  const firstWed = "2024-01-03"
-  const secondWed = "2024-01-10"
+  const firstWed = '2024-01-03'
+  const secondWed = '2024-01-10'
 
   describe('getThisWednesday', () => {
     it('on TUE, gets THIS Wed', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-02T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-02T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getThisWednesday()
       expect(returnedWed).toEqual(firstWed)
     })
+
     it('on WED, gets CURRENT date', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-03T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-03T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getThisWednesday()
       expect(returnedWed).toEqual(firstWed)
     })
+
     it('on THU, gets NEXT Wed', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-04T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-04T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getThisWednesday()
       expect(returnedWed).toEqual(secondWed)
     })
@@ -121,17 +132,28 @@ describe('find wednesdays', () => {
 
   describe('getNextWednesday', () => {
     it('on TUE, gets THIS Wed', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-02T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-02T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getNextWednesday()
       expect(returnedWed).toEqual(firstWed)
     })
+
     it('on Wed, gets NEXT Wed', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-03T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-03T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getNextWednesday()
       expect(returnedWed).toEqual(secondWed)
     })
+
     it('on THU, gets NEXT Wed', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-04T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-04T00:00:00Z'),
+      )
+
       const returnedWed = dateUtils.getNextWednesday()
       expect(returnedWed).toEqual(secondWed)
     })
@@ -148,12 +170,15 @@ describe('getRecentWednesdays', () => {
   })
 
   afterAll(() => {
-    (global.Date as DateType) = OriginalDate
+    global.Date = OriginalDate
   })
 
   describe('returns five dates in reverse order', () => {
     it('starting with upcoming Wednesday', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-01T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-01T00:00:00Z'),
+      )
+
       const dateArr = dateUtils.getRecentWednesdays()
       expect(dateArr).toEqual([
         '2024-01-03',
@@ -165,7 +190,10 @@ describe('getRecentWednesdays', () => {
     })
 
     it('starting with today when called on Wednesday', () => {
-      vi.spyOn(global, 'Date').mockImplementation(() => new OriginalDate('2024-01-10T00:00:00Z'))
+      vi.spyOn(global, 'Date').mockImplementation(
+        () => new OriginalDate('2024-01-10T00:00:00Z'),
+      )
+
       const dateArr = dateUtils.getRecentWednesdays()
       expect(dateArr).toEqual([
         '2024-01-10',

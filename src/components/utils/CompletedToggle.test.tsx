@@ -24,11 +24,11 @@ describe('CompletedToggle Component', () => {
       }
       const { container } = render(<CompletedToggle goal={mockGoal} />)
       expect(container).toMatchSnapshot()
-  
+
       const markCompleteButton = screen.getByLabelText('mark completed')
       expect(markCompleteButton).toBeInTheDocument()
       expect(markCompleteButton).toBeEnabled()
-  
+
       const markIncompleteButton = screen.getByLabelText('mark incomplete')
       expect(markIncompleteButton).toBeInTheDocument()
       expect(markIncompleteButton).toBeDisabled()
@@ -43,11 +43,11 @@ describe('CompletedToggle Component', () => {
 
       const { container } = render(<CompletedToggle goal={mockGoal} />)
       expect(container).toMatchSnapshot()
-  
+
       const markCompleteButton = screen.getByLabelText('mark completed')
       expect(markCompleteButton).toBeInTheDocument()
       expect(markCompleteButton).toBeDisabled()
-  
+
       const markIncompleteButton = screen.getByLabelText('mark incomplete')
       expect(markIncompleteButton).toBeInTheDocument()
       expect(markIncompleteButton).toBeEnabled()
@@ -61,11 +61,11 @@ describe('CompletedToggle Component', () => {
 
       const { container } = render(<CompletedToggle goal={mockGoal} />)
       expect(container).toMatchSnapshot()
-  
+
       const markCompleteButton = screen.getByLabelText('mark completed')
       expect(markCompleteButton).toBeInTheDocument()
       expect(markCompleteButton).toBeEnabled()
-  
+
       const markIncompleteButton = screen.getByLabelText('mark incomplete')
       expect(markIncompleteButton).toBeInTheDocument()
       expect(markIncompleteButton).toBeDisabled()
@@ -78,7 +78,9 @@ describe('CompletedToggle Component', () => {
         completed: false,
       }
 
-      const { container, rerender } = render(<CompletedToggle goal={mockGoal} />)
+      const { container, rerender } = render(
+        <CompletedToggle goal={mockGoal} />,
+      )
       expect(container).toMatchSnapshot()
       const markCompleteButton = screen.getByLabelText('mark completed')
       const markIncompleteButton = screen.getByLabelText('mark incomplete')
@@ -116,7 +118,7 @@ describe('CompletedToggle Component', () => {
       await user.click(markCompleteButton)
       expect(setGoalComplete).toHaveBeenCalledWith(mockGoal.date, true)
       expect(setGoalComplete).toHaveBeenCalledTimes(1)
-      
+
       await user.click(markCompleteButton)
       expect(setGoalComplete).toHaveBeenCalledTimes(2)
     })

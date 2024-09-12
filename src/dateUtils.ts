@@ -90,11 +90,11 @@ function compareDate(
   dateStr: string,
   fn: (givenDate: Date, today: Date) => boolean,
 ) {
-  const inputDate = new Date(dateStr)
+  const [year, month, day] = dateStr.split('-').map(Number)
+  const inputDate = new Date(Date.UTC(year, month - 1, day))
+
   const currentDate = new Date()
-  // compare date only, ignore time of day
-  inputDate.setHours(0, 0, 0, 0)
-  currentDate.setHours(0, 0, 0, 0)
+  currentDate.setUTCHours(0, 0, 0, 0) // compare date only, ignore time of day
 
   return fn(inputDate, currentDate)
 }

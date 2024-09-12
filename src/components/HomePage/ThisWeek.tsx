@@ -14,7 +14,7 @@ import { useData } from '../../firebase/contexts/data'
 import { getUserId } from '../../firebase/auth'
 import { updateRatingThisWeek } from '../../firebase/db'
 import { getThisWednesday } from '../../dateUtils'
-import { getGenericColour, lightenColor } from '../../colourUtils'
+import { getGenericColour, lightenColour } from '../../colourUtils'
 
 function ThisWeek() {
   const { users, ratings } = useData()
@@ -42,7 +42,7 @@ function ThisWeek() {
       </Heading>
       {usersActiveRatings.map((rating, idx) => {
         const col = rating.col || getGenericColour(idx)
-        const lightCol = lightenColor(col, 40)
+        const lightCol = lightenColour(col, 40)
 
         const displayVal = currentRatings[rating.id] || 2
 

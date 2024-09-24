@@ -92,6 +92,7 @@ describe('find wednesdays', () => {
   beforeAll(() => {
     OriginalDate = global.Date
     vi.spyOn(global, 'Date')
+    global.Date.now = OriginalDate.now
   })
 
   afterAll(() => {
@@ -167,6 +168,7 @@ describe('getRecentWednesdays', () => {
   beforeAll(() => {
     OriginalDate = global.Date
     vi.spyOn(global, 'Date')
+    global.Date.now = OriginalDate.now
   })
 
   afterAll(() => {

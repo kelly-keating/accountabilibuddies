@@ -1,10 +1,10 @@
-import userEvent from '@testing-library/user-event'
-
 import { render, screen } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
-import CompletedToggle from './CompletedToggle'
-import { setGoalComplete } from '../../firebase/db'
+import userEvent from '@testing-library/user-event'
 import { Goal } from '../../models'
+
+import { setGoalComplete } from '../../firebase/db'
+
+import CompletedToggle from './CompletedToggle'
 
 vi.mock('../../firebase/db', () => ({
   setGoalComplete: vi.fn(),
